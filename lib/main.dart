@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:device_preview/device_preview.dart';
-
 void main() {
-  runApp(DevicePreview(
-    enabled: true,
-    builder: (context) => PointsCounter(),
-  ));
+  runApp(const PointsCounter());
 }
 
-// ignore: must_be_immutable
 class PointsCounter extends StatefulWidget {
+  const PointsCounter({super.key});
+
   @override
   State<PointsCounter> createState() => _PointsCounterState();
 }
@@ -23,10 +19,6 @@ class _PointsCounterState extends State<PointsCounter> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // ignore: deprecated_member_use
-      useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
@@ -235,3 +227,5 @@ class _PointsCounterState extends State<PointsCounter> {
     );
   }
 }
+
+

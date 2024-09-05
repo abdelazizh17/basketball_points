@@ -7,18 +7,8 @@ void main() {
   runApp(const PointsCounter());
 }
 
-class PointsCounter extends StatefulWidget {
+class PointsCounter extends StatelessWidget {
   const PointsCounter({super.key});
-
-  @override
-  State<PointsCounter> createState() => _PointsCounterState();
-}
-
-class _PointsCounterState extends State<PointsCounter> {
-  //stateFull Object
-  int teamAPoints = 0;
-
-  int teamBPoints = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -32,26 +22,13 @@ class _PointsCounterState extends State<PointsCounter> {
   }
 }
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int? teamApoints, teamBpoints;
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CounterCubit, CounterState>(
-      listener: (context, state) {
-        if (state is CounterAIncrementState) {
-          teamApoints = BlocProvider.of<CounterCubit>(context).teamAPoints;
-        } else {
-          teamBpoints = BlocProvider.of<CounterCubit>(context).teamBPoints;
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -74,9 +51,9 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 35,
                         ),
                       ),
-                      const Text(
-                        '0',
-                        style: TextStyle(
+                      Text(
+                        '${BlocProvider.of<CounterCubit>(context).teamAPoints}',
+                        style: const TextStyle(
                           height: 0,
                           fontSize: 150,
                         ),
@@ -86,7 +63,12 @@ class _HomePageState extends State<HomePage> {
                           backgroundColor: Colors.orange,
                           minimumSize: const Size(150, 50),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<CounterCubit>(context).teamIncrement(
+                            team: 'A',
+                            buttonNumber: 1,
+                          );
+                        },
                         child: const Text(
                           'Add 1 Point',
                           style: TextStyle(
@@ -103,7 +85,12 @@ class _HomePageState extends State<HomePage> {
                           backgroundColor: Colors.orange,
                           minimumSize: const Size(150, 50),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<CounterCubit>(context).teamIncrement(
+                            team: 'A',
+                            buttonNumber: 2,
+                          );
+                        },
                         child: const Text(
                           'Add 2 Point',
                           style: TextStyle(
@@ -120,7 +107,12 @@ class _HomePageState extends State<HomePage> {
                           backgroundColor: Colors.orange,
                           minimumSize: const Size(150, 50),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<CounterCubit>(context).teamIncrement(
+                            team: 'A',
+                            buttonNumber: 3,
+                          );
+                        },
                         child: const Text(
                           'Add 3 Point',
                           style: TextStyle(
@@ -148,9 +140,9 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 35,
                         ),
                       ),
-                      const Text(
-                        '0',
-                        style: TextStyle(
+                      Text(
+                        '${BlocProvider.of<CounterCubit>(context).teamBPoints}',
+                        style: const TextStyle(
                           height: 0,
                           fontSize: 150,
                         ),
@@ -160,7 +152,12 @@ class _HomePageState extends State<HomePage> {
                           backgroundColor: Colors.orange,
                           minimumSize: const Size(150, 50),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<CounterCubit>(context).teamIncrement(
+                            team: 'B',
+                            buttonNumber: 1,
+                          );
+                        },
                         child: const Text(
                           'Add 1 Point',
                           style: TextStyle(
@@ -177,7 +174,12 @@ class _HomePageState extends State<HomePage> {
                           backgroundColor: Colors.orange,
                           minimumSize: const Size(150, 50),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<CounterCubit>(context).teamIncrement(
+                            team: 'B',
+                            buttonNumber: 2,
+                          );
+                        },
                         child: const Text(
                           'Add 2 Point',
                           style: TextStyle(
@@ -194,7 +196,12 @@ class _HomePageState extends State<HomePage> {
                           backgroundColor: Colors.orange,
                           minimumSize: const Size(150, 50),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<CounterCubit>(context).teamIncrement(
+                            team: 'B',
+                            buttonNumber: 3,
+                          );
+                        },
                         child: const Text(
                           'Add 3 Point',
                           style: TextStyle(
@@ -213,7 +220,9 @@ class _HomePageState extends State<HomePage> {
                   backgroundColor: Colors.orange,
                   minimumSize: const Size(150, 50),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  BlocProvider.of<CounterCubit>(context).counterRest();
+                },
                 child: const Text(
                   'Rest',
                   style: TextStyle(
